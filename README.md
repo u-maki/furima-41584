@@ -6,9 +6,7 @@
 | email	| string	| null: false, unique: true |
 | encrypted_password	| string	null: false |
 | nickname	| string	| null: false |
-| birthday	| date	| null: false |
 | tel	| string	| null: false |
-| self_introduction	| text |	
 | last_name	| string	| null: false |
 | first_name	| string	| null: false |
 | last_name_kana	| string	| null: false |
@@ -16,15 +14,15 @@
 
 ### Association
 
-- has_many : products dependent: :destroy
-- belongs_to :destination dependent: :destroy
-- belongs_to :card dependent: :destroy
+- has_many : products 
+- belongs_to :destination 
+- belongs_to :card
+
 
 ##destinationテーブル
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| user_id	| integer	| null: false, foreign_key: true |
 | family_name	| string	| null: false |
 | first_name	| string	| null: false |
 | family_name_kana	| string	| null: false |
@@ -51,16 +49,7 @@
 
 - belongs_to :user
 
-##categoryテーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| name	| string	| null: false |
-| ancestry	| string |	
-
-### Association
-
-- has_many : products
 
 ##produstテーブル
 
@@ -100,12 +89,3 @@
 | product_id	| integer	| null: false, foreign_key: true |
 
 
-##brandsテーブル
-
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| name	| string	| index: true |
-
-### Association
-
-- has_many : products
