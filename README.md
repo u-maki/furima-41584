@@ -6,7 +6,7 @@
 | email	| string	| null: false, unique: true |
 | encrypted_password	| string	null: false |
 | nickname	| string	| null: false |
-| tel	| string	| null: false |
+| birthday	| date	| null: false |
 | last_name	| string	| null: false |
 | first_name	| string	| null: false |
 | last_name_kana	| string	| null: false |
@@ -15,39 +15,40 @@
 ### Association
 
 - has_many : products 
-- belongs_to :destination 
-- belongs_to :card
+- has_many : comments
+- has_many : purchaserecords
+- belong_to : sellers
 
-
-##destinationテーブル
+##purchaserecordsテーブル
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| family_name	| string	| null: false |
-| first_name	| string	| null: false |
-| family_name_kana	| string	| null: false |
-| first_name_kane	s| tring	| null: false |
-| post_code	| string	| null: false |
-| prefecture	| string	| null: false |
-| city	| string	| null: false |
-| address	| string	| null: false |
-| tel	| string |
+| purchaserecord_id | integer	| null: false |
+| user_id         | integer	| null: false foreign_key: true |
+| product_id        | integer	| null: false |foreign_key: true |
+| totalprice          | integer	| null: false |
+| shippingstatus       | string	| null: false |
+
 
 ### Association
 
 - belongs_to :user
+- belongs_to :produst
 
-##cardテーブル
+
+##commentsテーブル
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| user_id	| integer	| null: false, foreign_key: true |
-| customer_id	| string	| null: false |
-| card_id	| string	| null: false |
+| comment_id	| integer	| null |
+| product_id	| integer	| null: false foreign_key: true|
+| user_id	| integer	| null: false foreign_key: true|
+| content	| text	| null: false |
 
 ### Association
 
 - belongs_to :user
+- belongs_to :product
 
 
 
@@ -55,37 +56,19 @@
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| name	| string	| null: false |
-| price	| string	| null: false |
-| description	| string	| null: false |
-| status	| string	| null: false |
-| size	| string	| null: false |
-| shipping_cost	| string	| null: false |
-| shipping_days	| string	| null: false |
-| prefecture_id	string	| null: false |
-| category_id	| integer	| null: false, foreign_key: true |
-| brand_id	| integer	| null: false, foreign_key: true |
-| shipping_id	| integer	| null: false, foreign_key: true |
-| user_id	| integer	| null: false, foreign_key: true |
+| product_id (PK)       |integer	| null |
+| sellerI_id (FK)        | integer	| null: false foreign_key: true |
+| category              |string	| null: false |
+| condition             |string	| null: false |
+| shipping_cost          | integer	| null |
+| shipping_origin        |string	| null: false |
+| shipping_estimate      |string	| null: false |
 
 ### Association
 
-- belongs_to :user dependent: :destroy
-
-- belongs_to :category dependent: :destroy
-
-- belongs_to :brand dependent: :destroy
-
-- has_many :images dependent: :destroy
-
-- belongs_to_active_hash :prefecture
-
-
-##imagesテーブル
-
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| image	| string	| null: false |
-| product_id	| integer	| null: false, foreign_key: true |
+- belongs_to :user
+- belongs_to :seller
+- has_many :purchaserecords
+- has_many :comments
 
 
