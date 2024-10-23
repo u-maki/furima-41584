@@ -15,9 +15,7 @@
 ### Association
 
 - has_many : products 
-- has_many : comments
 - has_many : purchaserecords
-- belong_to : sellers
 
 ##purchaserecordsテーブル
 
@@ -33,22 +31,25 @@
 ### Association
 
 - belongs_to :user
-- belongs_to :produst
+- belongs_to :hippingaddres
+- has_many : products 
 
 
-##commentsテーブル
+##shippingaddresesテーブル
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| comment_id	| integer	| null |
-| product_id	| integer	| null: false foreign_key: true|
+| address_id	| text	| null |
 | user_id	| integer	| null: false foreign_key: true|
-| content	| text	| null: false |
+| recipentname	| string	| null: false, unique: true |
+| post-code	| integer	| null: false |
+| prefecture	| text	| null: false |
+| city	| text	| null: false |
+| addres	| text	| null: false |
 
 ### Association
 
-- belongs_to :user
-- belongs_to :product
+- has_many :purchaserecords
 
 
 
@@ -67,8 +68,6 @@
 ### Association
 
 - belongs_to :user
-- belongs_to :seller
-- has_many :purchaserecords
-- has_many :comments
+- belong_to :purchaserecord
 
 
