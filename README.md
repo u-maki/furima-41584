@@ -20,25 +20,25 @@
 
 ##purchase_recordsテーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| user               | integer| null: false, foreign_key: true |
-| product            | integer| null: false, foreign_key: true |
+| Column             | Type       | Options     |
+| ------------------ | ---------- | ----------- |
+| user               | references | null: false, foreign_key: true |
+| product            | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
+- belongs_to :product
 - belongs_to :shipping_address
-- belongs_to :product 
 
 
 ##shipping_addressesテーブル
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- | 
-| recipient_name	   | string | null: false, unique: true |
-| postal_code	       | integer| null: false |
-| prefecture	       | string	| null: false, foreign_key: true|
+| user	references	null: false, foreign_key: true |
+| postal_code	       | string | null: false |
+| prefecture_id	     | integer| null: false |
 | city	             | string	| null: false | 
 | street_address     | string	| null: false |
 | building_name      | string	| 
@@ -46,7 +46,7 @@
 
 ### Association
 
-- belongs_to :purchase_record
+- has_one :purchase_record
 
 
 
@@ -54,19 +54,20 @@
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| category           | string	| null: false |
-| condition          | string	| null: false |
-| shipping_cost      | integer| null: true  |
-| shipping_region    | string	| null: false |
-| shipping_time      | string	| null: false |
+| category_id          | integer	| null: false |
+| condition_id         | integer	| null: false |
+| shipping_cost_id      | integer| null: true  |
+| shipping_region_id    | integer	| null: false |
+| shipping_time_id      | integer	| null: false |
 | product_name       | string	| null: false |
-| productdescription | text	  | null: false |
+| product_description | text	  | null: false |
 | price              | integer| null        |
-| image              | string | null: false |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- belongs_to :purchase_record
+- has_one :purchase_record
+- has_one_attached :image
 
 
