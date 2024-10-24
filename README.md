@@ -1,75 +1,72 @@
 # README
 ##usersテーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| email	| string	| null: false, unique: true |
-| encrypted_password	| string	null: false |
-| nickname	| string	| null: false |
-| birthday	| date	| null: false |
-| last_name	| string	| null: false |
-| first_name	| string	| null: false |
-| last_name_kana	| string	| null: false |
-| first_name_kana	| string	| null: false |
+| Column              | Type   | Options     |
+| ------------------  | ------ | ----------- |
+| email	              | string | null: false, unique: true |
+| encrypted_password	| string | null: false |
+| nickname	          | string | null: false |
+| birthday	          | date	 | null: false |
+| last_name	          | string | null: false |
+| first_name	        | string | null: false |
+| last_name_kana	    | string | null: false |
+| first_name_kana	    | string | null: false |
 
 ### Association
 
 - has_many : products 
-- has_many : purchaserecords
+- has_many : purchase_records
 
 
-##purchaserecordsテーブル
+##purchase_recordsテーブル
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| user_id         | integer	| null: false foreign_key: true |
-| product_id        | integer	| null: false |foreign_key: true |
-
-
+| user               | integer| null: false, foreign_key: true |
+| product            | integer| null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- belongs_to :shippingaddres
-- belong_to : product 
+- belongs_to :shipping_address
+- belongs_to :product 
 
 
-##shippingaddresesテーブル
+##shipping_addressesテーブル
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- | 
-| user_id	| integer	| null: false foreign_key: true|
-| recipentname	| string	| null: false, unique: true |
-| postal-code	| integer	| null: false |
-| prefecture	| string	| null: false |
-| city	| text	| null: false |
-| streetaddres	| text	| null: false |
-| buildingname	| text	| null: false |
-| phonenumber	| integer	| null: false |
-| purchaserecord_id	| integer	| null: false |
+| recipient_name	   | string | null: false, unique: true |
+| postal_code	       | integer| null: false |
+| prefecture	       | string	| null: false, foreign_key: true|
+| city	             | string	| null: false | 
+| street_address     | string	| null: false |
+| building_name      | string	| 
+| phone_number	     | string	| null: false |
 
 ### Association
 
-- belong_to :purchaserecords
+- belongs_to :purchase_record
 
 
 
-##produstテーブル
+##productsテーブル
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| category              |string	| null: false |
-| condition             |string	| null: false |
-| shipping_cost          | integer	| null |
-| shipping_region        | string	| null: false
-| shipping_time | string	| null: false
-| productname | string	| null: false
-| productdescription | string	| null: false
-| price | integer	| null |
+| category           | string	| null: false |
+| condition          | string	| null: false |
+| shipping_cost      | integer| null: true  |
+| shipping_region    | string	| null: false |
+| shipping_time      | string	| null: false |
+| product_name       | string	| null: false |
+| productdescription | text	  | null: false |
+| price              | integer| null        |
+| image              | string | null: false |
 
 ### Association
 
 - belongs_to :user
-- has_many :purchaserecords
+- belongs_to :purchase_record
 
 
