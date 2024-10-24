@@ -1,5 +1,5 @@
 # README
-##usersテーブル
+## usersテーブル
 
 | Column              | Type   | Options     |
 | ------------------  | ------ | ----------- |
@@ -18,7 +18,7 @@
 - has_many : purchase_records
 
 
-##purchase_recordsテーブル
+## purchase_recordsテーブル
 
 | Column             | Type       | Options     |
 | ------------------ | ---------- | ----------- |
@@ -32,7 +32,7 @@
 - has_one :shipping_address
 
 
-##shipping_addressesテーブル
+## shipping_addressesテーブル
 
 | Column             | Type      | Options     |
 | ------------------ | --------- | ----------- | 
@@ -50,14 +50,14 @@
 
 
 
-##productsテーブル
+## productsテーブル
 
 | Column             | Type    | Options     |
 | ------------------ | ------- | ----------- |
 | category_id        | integer | null: false |
 | condition_id       | integer | null: false |
 | shipping_cost_id   | integer | null: true  |
-| shipping_region_id | integer | null: false |
+| prefecture_id      | integer | null: false |
 | shipping_time_id   | integer | null: false |
 | product_name       | string  | null: false |
 | product_description | text   | null: false |
