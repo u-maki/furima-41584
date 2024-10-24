@@ -36,7 +36,7 @@
 
 | Column             | Type      | Options     |
 | ------------------ | --------- | ----------- | 
-| user	             |references |null: false, foreign_key: true |
+| purchase_record    |references |null: false, foreign_key: true |
 | postal_code	       | string    | null: false |
 | prefecture_id	     | integer   | null: false |
 | city	             | string    | null: false | 
