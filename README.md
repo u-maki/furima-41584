@@ -17,39 +17,40 @@
 - has_many : products 
 - has_many : purchaserecords
 
+
 ##purchaserecordsテーブル
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| purchaserecord_id | integer	| null: false |
 | user_id         | integer	| null: false foreign_key: true |
 | product_id        | integer	| null: false |foreign_key: true |
-| totalprice          | integer	| null: false |
-| shippingstatus       | string	| null: false |
+
 
 
 ### Association
 
 - belongs_to :user
-- belongs_to :hippingaddres
-- has_many : products 
+- belongs_to :shippingaddres
+- belong_to : product 
 
 
 ##shippingaddresesテーブル
 
 | Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| address_id	| text	| null |
+| ------------------ | ------ | ----------- | 
 | user_id	| integer	| null: false foreign_key: true|
 | recipentname	| string	| null: false, unique: true |
-| post-code	| integer	| null: false |
-| prefecture	| text	| null: false |
+| postal-code	| integer	| null: false |
+| prefecture	| string	| null: false |
 | city	| text	| null: false |
-| addres	| text	| null: false |
+| streetaddres	| text	| null: false |
+| buildingname	| text	| null: false |
+| phonenumber	| integer	| null: false |
+| purchaserecord_id	| integer	| null: false |
 
 ### Association
 
-- has_many :purchaserecords
+- belong_to :purchaserecords
 
 
 
@@ -57,17 +58,18 @@
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| product_id (PK)       |integer	| null |
-| sellerI_id (FK)        | integer	| null: false foreign_key: true |
 | category              |string	| null: false |
 | condition             |string	| null: false |
 | shipping_cost          | integer	| null |
-| shipping_origin        |string	| null: false |
-| shipping_estimate      |string	| null: false |
+| shipping_region        | string	| null: false
+| shipping_time | string	| null: false
+| productname | string	| null: false
+| productdescription | string	| null: false
+| price | integer	| null |
 
 ### Association
 
 - belongs_to :user
-- belong_to :purchaserecord
+- has_many :purchaserecords
 
 
