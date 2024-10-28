@@ -10,6 +10,7 @@ class CreateItems < ActiveRecord::Migration[7.0]
           t.text :product_description, null: false
           t.integer :price, null: false
           t.references :user, null: false, foreign_key: true
+          t.string :image
     
           t.timestamps
     end

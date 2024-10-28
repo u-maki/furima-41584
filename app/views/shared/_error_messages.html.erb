@@ -8,13 +8,12 @@
     </ul>
   </div>
 <% end %>
-
 <% if model.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(model.errors.count, "error") %> 禁止されています:</h2>
+    <h2><%= pluralize(model.errors.count, 'エラー') %>が発生しました：</h2>
     <ul>
-      <% model.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <% model.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
       <% end %>
     </ul>
   </div>
