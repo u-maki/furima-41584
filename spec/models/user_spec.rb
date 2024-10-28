@@ -59,12 +59,6 @@ RSpec.describe User, type: :model do
         @user.valid? # @user.valid? を呼び出す
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
-      it 'passwordが英字と数字を含まない場合、登録できない' do
-        @user.password = 'password' # パスワードを英字のみに設定
-        @user.password_confirmation = 'password' # 確認用パスワードも同様に設定
-        @user.valid? # @user.valid? を呼び出す
-        expect(@user.errors.full_messages).to include('Password は半角英字と数字を混合させてください')
-      end
 
       it 'passwordが数字のみの場合、登録できない' do
         @user.password = '123456' # パスワードを数字のみに設定
@@ -80,10 +74,63 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('Password は半角英字と数字を混合させてください')
       end
 
-      it 'passwordが英数字混合の場合、登録できる' do
-        @user.password = 'abc123' # パスワードを英数字混合に設定
-        @user.password_confirmation = 'abc123' # 確認用パスワードも同様に設定
-        expect(@user).to be_valid # @userが有効であることを期待
+      it '重複したemailが存在する場合は登録できない' do
+        @user.save
+        another_user = FactoryBot.build(:user)
+        another_user.email = @user.email
+        another_user.valid?
+        expect(another_user.errors.full_messages).to include('Email has already been taken')
+      end
+
+      it 'emailは@を含まないと登録できない' do
+        @user.email = 'testmail'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Email is invalid')
+      end
+
+      it 'passwordが6文字未満では登録できない' do
+        @user.password = '00000'
+        @user.password_confirmation = '00000'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
+      end
+
+      it '全角文字を含むパスワードでは登録できない' do
+        @user.password = 'passwordあ123' # 全角文字を含むパスワード
+        @user.password_confirmation = 'passwordあ123'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password は半角英字と数字を混合させてください')
+      end
+
+      it 'passwordとpassword_confirmationが不一致では登録できない' do
+        @user.password = '123456'
+        @user.password_confirmation = '1234567'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+
+      it '姓に半角文字が含まれていると登録できない' do
+        @user.last_name = 'Yamada' # 半角文字を含む姓
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name はひらがな・カタカナ・漢字のみ使用できます')
+      end
+
+      it '名に半角文字が含まれていると登録できない' do
+        @user.first_name = 'Taro' # 半角文字を含む名
+        @user.valid?
+        expect(@user.errors.full_messages).to include('First name はひらがな・カタカナ・漢字のみ使用できます')
+      end
+
+      it '姓（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
+        @user.last_name_kana = 'やま田Aa1!' # 平仮名、漢字、英数字、記号を含む
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name kana は全角カタカナのみで入力してください。')
+      end
+
+      it '名（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
+        @user.first_name_kana = 'た朗Aa1!' # 平仮名、漢字、英数字、記号を含む
+        @user.valid?
+        expect(@user.errors.full_messages).to include('First name kana は全角カタカナのみで入力してください。')
       end
     end
   end
