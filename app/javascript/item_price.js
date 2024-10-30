@@ -7,7 +7,7 @@ document.addEventListener('turbo:load', () => {
     priceInput.addEventListener('input', () => {
       const price = parseInt(priceInput.value, 10);
 
-      if (!isNaN(price) && price >= 300 && price <= 9999999) {
+      if (price >= 0) { 
         const fee = Math.floor(price * 0.1);
         const profit = price - fee;
 
@@ -17,6 +17,6 @@ document.addEventListener('turbo:load', () => {
         taxPriceDisplay.textContent = '0';
         profitDisplay.textContent = '0';
       }
-    });
+   });
   }
 });
