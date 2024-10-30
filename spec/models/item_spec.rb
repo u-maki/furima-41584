@@ -86,7 +86,7 @@ RSpec.describe Item, type: :model do
       it 'ユーザーが紐づいていないと保存できない' do
         item.user = nil # ユーザーをnilにする
         item.valid? # バリデーションを実行
-        expect(item.errors[:user]).to include('を入力してください') # 期待されるエラーメッセージを確認
+        expect(item.errors[:user]).to include('must exist') # 期待されるエラーメッセージを確認
       end
     end
   end

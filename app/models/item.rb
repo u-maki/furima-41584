@@ -10,7 +10,7 @@ class Item < ApplicationRecord
 
   validates :product_name, presence: { message: 'を入力してください' }
   validates :product_description, presence: { message: 'を入力してください' }
-  with_options presence: true, exclusion: { in: [1], message: 'を選択してください' } do
+  with_options presence: true, numericality: { other_than: 1, message: 'を選択してください' } do
     validates :category_id
     validates :condition_id
     validates :shipping_cost_id
@@ -25,7 +25,6 @@ class Item < ApplicationRecord
                       message: 'は半角入力の¥300以上、¥9,999,999以下で入力してください'
                     }
   validates :image, presence: { message: 'を添付してください' }
-  validates :user, presence: { message: 'を入力してください' }
   has_one_attached :image
   # has_one :purchase_record
 end
