@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
+    @items = Item.all
   end
 
   def new
@@ -16,6 +17,10 @@ class ItemsController < ApplicationController
       flash.now[:alert] = '入力に不備があります。再度ご確認ください。'
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @item = Item.find(params[:id])
   end
 
   private
