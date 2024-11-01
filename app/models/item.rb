@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_cost, class_name: 'ShippingCost'
   belongs_to :prefecture, class_name: 'Prefecture'
   belongs_to :shipping_time, class_name: 'ShippingTime'
+  # has_one :purchase_record, class_name: 'PurchaseRecord'
 
   validates :product_name, presence: { message: 'を入力してください' }
   validates :product_description, presence: { message: 'を入力してください' }
@@ -26,5 +27,4 @@ class Item < ApplicationRecord
                     }
   validates :image, presence: { message: 'を添付してください' }
   has_one_attached :image
-  # has_one :purchase_record
 end
