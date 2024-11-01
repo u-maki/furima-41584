@@ -14,7 +14,7 @@
 
 ### Association
 
-- has_many : products 
+- has_many : items 
 - has_many : purchase_records
 
 
@@ -28,7 +28,7 @@
 ### Association
 
 - belongs_to :user
-- belongs_to :product
+- belongs_to :item
 - has_one :shipping_address
 
 
@@ -50,7 +50,7 @@
 
 
 
-## Itemsテーブル
+## itemsテーブル
 
 | Column             | Type    | Options     |
 | ------------------ | ------- | ----------- |
