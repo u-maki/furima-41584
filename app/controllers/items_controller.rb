@@ -38,11 +38,9 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if @item.destroy
-      redirect_to root_path, notice: '商品を削除しました。'
-    else
-      redirect_to item_path(@item)
-    end
+    return unless @item.destroy
+
+    redirect_to root_path
   end
 
   private
@@ -52,7 +50,7 @@ class ItemsController < ApplicationController
   end
 
   def authorize_user!
-    return if current_user&.id == @item.user_id
+    return unless current_user.id != @item.user_id
 
     redirect_to root_path
   end
