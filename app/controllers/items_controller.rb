@@ -24,9 +24,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    return unless @item.user_id != current_user.id
+    # return unless @item.user_id != current_user.id
 
-    redirect_to root_path
+    # redirect_to root_path
   end
 
   def update
@@ -38,16 +38,23 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    return unless user_signed_in? && @item.user == current_user
-
-    @item.destroy
-    redirect_to root_path
+    if @item.destroy
+      redirect_to root_path, notice: '商品を削除しました。'
+    else
+      redirect_to item_path(@item)
+    end
   end
 
   private
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def authorize_user!
+    return if current_user&.id == @item.user_id
+
+    redirect_to root_path
   end
 
   def item_params
