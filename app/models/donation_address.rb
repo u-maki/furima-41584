@@ -1,8 +1,7 @@
 class DonationAddress
   include ActiveModel::Model
 
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :street_address, :building_name, :phone_number,
-                :purchase_record_id, :token
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :street_address, :building_name, :phone_number, :token
 
   with_options presence: true do
     validates :user_id
@@ -16,7 +15,7 @@ class DonationAddress
   end
 
   def save
-    purchase_record = PurchaseRecord.create(user_id: user_id, item_id: item_id)
+    order = Order.create(user_id: user_id, item_id: item_id)
 
     Address.create(
       purchase_record_id: purchase_record.id,
