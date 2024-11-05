@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-devise_for :users
+  devise_for :users
+  root to: "items#index"
   resources :items do
-    resources :orders, only: [:index, :create]  # ordersをitemsにネスト
+    resources :orders, only: [:index, :create]
   end
-  root to: 'items#index'
 end
-
 
