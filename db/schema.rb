@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_31_022613) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_05_032541) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,28 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_31_022613) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "addresses", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "donation_id", null: false
+    t.string "postal_code", null: false
+    t.integer "prefecture_id", null: false
+    t.string "city", null: false
+    t.string "street_address", null: false
+    t.string "building_name"
+    t.string "phone_number", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["donation_id"], name: "index_addresses_on_donation_id"
+  end
+
+  create_table "donations", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_donations_on_item_id"
+    t.index ["user_id"], name: "index_donations_on_user_id"
+  end
+
   create_table "items", charset: "utf8mb3", force: :cascade do |t|
     t.integer "category_id", null: false
     t.integer "condition_id", null: false
@@ -52,6 +74,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_31_022613) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "orders", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_orders_on_item_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "purchase_records", charset: "utf8mb3", force: :cascade do |t|
@@ -83,7 +114,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_31_022613) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addresses", "donations"
+  add_foreign_key "donations", "items"
+  add_foreign_key "donations", "users"
   add_foreign_key "items", "users"
+  add_foreign_key "orders", "items"
+  add_foreign_key "orders", "users"
   add_foreign_key "purchase_records", "items"
   add_foreign_key "purchase_records", "users"
 end
