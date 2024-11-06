@@ -8,7 +8,6 @@ class Item < ApplicationRecord
   belongs_to :prefecture, class_name: 'Prefecture'
   belongs_to :shipping_time, class_name: 'ShippingTime'
   has_one :order, class_name: 'Order'
-  has_one :order_address, class_name: 'OrderAddress'
 
   validates :product_name, presence: { message: 'を入力してください' }
   validates :product_description, presence: { message: 'を入力してください' }

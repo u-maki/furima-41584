@@ -18,7 +18,6 @@ class OrderAddress
     Order.create(user_id: user_id, item_id: item_id)
 
     Address.create(
-      # order_id: order_id,
       postal_code: postal_code,
       prefecture_id: prefecture_id,
       city: city,
