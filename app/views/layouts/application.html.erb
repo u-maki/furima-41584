@@ -13,10 +13,6 @@
 
 <body>
   <%= yield %>
-  <script type="text/javascript">
-    const PAYJP_PUBLIC_KEY = "<%= ENV['PAYJP_PUBLIC_KEY'] %>";
-    Payjp.setPublicKey(PAYJP_PUBLIC_KEY);
-  </script>
 </body>
 
 </html>
